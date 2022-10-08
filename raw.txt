@@ -1,0 +1,311 @@
+ClrHome
+Lbl ST
+ClrHome
+Menu("MATHTOOLS BY LUTHER R.","FIND HYPOTENUSE",H,"FIND SIDE OF TRIANGLE",S,"FIND MAD",M,"QUADRATICS",QA,"STANDARD TO AX+B",L,"SIMPLIFY RADICAL",SR,"-\>",N,"QUIT",Q)
+Lbl N
+Menu("PAGE 2","UNCOMMON FACTORING TYPES",UN,"DISTANCE FORMULA",DF,"SYNTHETIC DIVISION",SY,"SLOPE FORMULA",SF,"MIDPOINT FORMULA",MF,"<-",ST,"-\>",NA,"QUIT",Q)
+Lbl NA
+Menu("PAGE 3","EULERS METHOD",EM,"<-",N,"QUIT",Q)
+
+Lbl SR
+ClrHome
+Input "squareroot",X
+If fPart(X)!=0:Then:Disp "NO DECIMALS":Stop:End
+iPart(sqrt(X)+1)->A
+Repeat fPart(X/A^2)=0
+	A-1->A
+End
+ClrHome
+Output(1,1,A)
+Output(1,3,"sqrt(")
+Output(1,4,X/A^2)
+Output(1,10," or ")
+Output(1,15,sqrt(X))
+Pause 
+ClrHome
+Stop
+
+Lbl EM
+0->F
+ClrList L1
+ClrList L2
+Input "[|d]Y/[|d]X: ",Str1
+Input "Number of steps: ",A
+Input "X: ",X
+Input "Y: ",Y
+X->I
+Input "DeltaX: ",B
+ClrHome
+(expr(Str1))->D
+ClrHome
+For(X,X,X+A*B-B,B)
+ F+1->F
+ X->L1(F)
+ Y->L2(F)
+ expr(Str1)->D
+ Y+D*B->Y
+End
+F+1->F
+X->L1(F)
+Y->L2(F)
+min(L2)->U
+max(L2)->T
+abs(T-U)->V
+If A>7:Then
+ Disp "Ans|w[|e][r][s] i[n] L1 & L2"
+ Pause 
+ ClrHome
+ Stop
+End
+Output(1,1,"X+DeltaX")
+Output(1,8,"Y+DeltaY")
+For(Z,1,A)
+ Output(Z+1,1,L1(Z))
+ Output(Z+1,8,L2(Z))
+ Output(Z+2,1,L1(Z+1))
+ Output(Z+2,8,L2(Z+1))
+End
+Pause 
+ClrHome
+Stop
+
+Lbl MF
+ClrHome
+Disp "POINT 1"
+Disp "([x1],[y1])"
+Input "[x1]=",A
+Input "[y1]=",B
+Disp "POINT 2"
+Disp "([x2],[y2])"
+Input "[x2]=",C
+Input "[y2]=",D
+(A+C)/2->X
+(B+D)/2->Y
+ClrHome
+Disp "(X+Y)"
+Output(5,10,"(    ,    )"
+Output(5,11,X
+Output(5,16,Y
+Output(5,1,"MIDPOINT="
+Pause 
+Stop
+
+Lbl SF
+Disp "[y2]-[y1]"
+Disp "-----"
+Disp "[x2]-[x1]"
+Input "[y2]=",A
+Input "[y1]=",B
+Input "[x2]=",C
+Input "[x1]=",D
+(A-B)/(C-D)->E
+Disp E
+Pause 
+Stop
+
+Lbl SY
+DelVar L1
+DelVar L2
+DelVar L3
+ClrHome
+Input "DIVIDEND DEGREE?          ",C
+C+1->dim(L1
+For(B,1,C+1
+	Disp "                         "
+	ClrHome
+	Disp "X^ ?"
+	Output(1,3,C+1-B
+	Input "",D
+	D->L1(B)
+End
+ClrHome
+Disp "DIVISOR (X+A)"
+Input "A=                        ",A
+~A->A
+L1(1)->L2(1)
+For(B,1,C
+	L1(B+1)+A*L2(B)->L2(B+1)
+End
+dim(L2)->C
+For(B,1,C
+	ClrHome
+	If B!=C
+	Then
+		Disp "X^ "
+		Output(1,3,C-B-1
+	Else
+		Disp "REMAINDER"
+	End
+	Disp L2(B)
+	Pause 
+End
+Stop
+
+Lbl H
+Disp "A^^2+B^^2=C^^2"
+Prompt A,B
+A^^2+B^^2->D
+sqrt(D->C
+Disp C
+Pause 
+Goto Q
+
+Lbl S
+Disp "A^^2+B^^2=C^^2"
+Prompt H,B
+H^^2-B^^2->D
+sqrt(D->A
+Disp A
+Pause 
+Goto Q
+
+Lbl UN
+Menu("TYPE","DIFF. OF SQUARE",F1,"PER. SQUARE TRI",F2,"SUM OF CUBES",F3,"DIFF. OF CUBES",F4,"<-",ST
+Lbl F1
+ClrHome
+Output(8,1,"                     AX^^2-B"
+Prompt A
+Prompt B
+sqrt(A)->A
+sqrt(B)->B
+ClrHome
+Output(1,1,"(  X+  )(  X-  )"
+Output(1,2,A
+Output(1,6,B
+Output(1,10,A
+Output(1,14,B
+Pause 
+ClrHome
+Stop
+Lbl F3
+ClrHome
+Output(8,1,"                     AX^^3+B"
+Prompt A
+Prompt B
+cuberoot(A->A
+cuberoot(B->B
+ClrHome
+Output(1,1,"                  (  X+  )             (  X^^2-  X+  )"
+Output(1,10,A
+Output(1,14,B
+Output(2,10,AB
+Output(2,5,A^^2
+Output(2,14,B^^2
+Pause 
+ClrHome
+Stop
+Lbl F4
+ClrHome
+Output(8,1,"                     AX^^3-B"
+Prompt A
+Prompt B
+cuberoot(A->A
+cuberoot(B->B
+ClrHome
+Output(1,1,"                  (  X-  )             (  X^^2+  X+  )"
+Output(1,10,A
+Output(1,14,B
+Output(2,10,AB
+Output(2,14,B^^2
+Output(2,5,A^^2
+Pause 
+ClrHome
+Stop
+Lbl F2
+ClrHome
+Output(8,1,"                  AX^^2+BX+C"
+Prompt A
+Prompt B
+Prompt C
+ClrHome
+sqrt(A->A
+sqrt(C->C
+Output(1,1,"                 (  X+  )^^2"
+Output(1,9,A
+Output(1,13,C
+Pause 
+ClrHome
+Stop
+Lbl DF
+Disp "D=sqrt(([x2]-[x1])^^2+([y2]-[y1])^^2)"
+Input "X1=",A
+Input "X2=",B
+Input "Y1=",C
+Input "Y2=",D
+sqrt((B-A)^^2+(D-C)^^2)->E
+Disp E
+Pause 
+Stop
+
+Lbl M
+ClrHome
+Input "L?:",|LSTAT
+Disp "MAD="
+Disp mean(abs(mean(|LSTAT)-|LSTAT)
+Pause 
+Goto Q
+
+Lbl QA
+Menu("QUADRATICS","QUADRATIC FORMULA",Q1,"<-",ST
+Lbl Q1
+Disp "X=~B+/-sqrt(B^^2-4AC)n/d2A"
+Disp " "
+Disp "AX^^2+BX+C"
+Disp "A"
+Input A
+Disp "B"
+Input B
+Disp "C"
+Input C
+(B^^2-4AC)->X
+If X
+Disp "NO REAL ANSWER OR"
+Disp "NOT STANDARD FORM"
+Disp "MULTIPLE ANSWERS"
+(~B+sqrt(X))n/d(2A)->Y
+(~B-sqrt(X))n/d(2A)->X
+Disp X,Y
+Pause 
+Goto Q
+
+Lbl L
+ClrHome
+Disp "AX+BY=C"
+Input "A=",A
+Input "B=",B
+Input "C=",C
+ClrHome
+~A->A
+Output(4,1,"Y=      X +     "
+If A/B!=round(A/B,0
+Then
+	Output(4,4,"----"
+	If A/B<0
+	Then
+		Output(3,3,"-"
+	End
+	Output(3,4,abs(A
+	Output(5,4,abs(B
+Else
+	Output(4,4,A/B
+End
+If C/B!=round(C/B,0
+Then
+	Output(4,13,"----"
+	If C/B<0
+	Then
+		Output(3,11,"-"
+	End
+	Output(3,13,abs(C
+	Output(5,13,abs(B
+Else
+	If C/B<0
+	Then
+		Output(4,11,"-"
+	End
+	Output(4,13,abs(C/B
+End
+Pause 
+ClrHome
+Goto ST
+Lbl Q
